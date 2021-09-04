@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DropdownWithSearch<T> extends StatelessWidget {
@@ -51,15 +52,6 @@ class DropdownWithSearch<T> extends StatelessWidget {
                   itemStyle: itemStyle,
                   items: items)).then((value) {
             onChanged(value);
-            /* if(value!=null)
-                    {
-                      onChanged(value);
-                      _lastSelected = value;
-                    }
-                    else {
-                      print("Value NULL $value $_lastSelected");
-                      onChanged(_lastSelected);
-                    }*/
           });
         },
         child: Container(
@@ -179,49 +171,13 @@ class _SearchDialogState<T> extends State<SearchDialog> {
                     onPressed: () {
                       FocusScope.of(context).unfocus();
                       Navigator.pop(context);
-                    })
-                /*Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Close',
-                      style: widget.titleStyle != null
-                          ? widget.titleStyle
-                          : TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                    )),
-              )*/
+                    }),
               ],
             ),
             SizedBox(height: 5),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16),
-              child: TextField(
-                autofocus: true,
-                decoration: InputDecoration(
-                  isDense: true,
-                  prefixIcon: Icon(Icons.search),
-                  hintText: widget.placeHolder,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                        widget.searchInputRadius != null
-                            ? Radius.circular(widget.searchInputRadius!)
-                            : Radius.circular(5)),
-                    borderSide: const BorderSide(
-                      color: Colors.black26,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                        widget.searchInputRadius != null
-                            ? Radius.circular(widget.searchInputRadius!)
-                            : Radius.circular(5)),
-                    borderSide: const BorderSide(color: Colors.black12),
-                  ),
-                ),
+              child: CupertinoSearchTextField(
                 style: widget.itemStyle != null
                     ? widget.itemStyle
                     : TextStyle(fontSize: 14),
