@@ -1,3 +1,4 @@
+import 'package:csc_picker/constant/enum.dart';
 import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -21,9 +22,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title ?? ""),
       ),
       body: Center(
         child: Container(
@@ -57,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   showCities: true,
 
                   ///Enable (get flag with country name) / Disable (Disable flag) / ShowInDropdownOnly (display flag in dropdown only) [OPTIONAL PARAMETER]
-                  flagState: CountryFlag.DISABLE,
+                  flagState: CountryFlag.SHOW_IN_DROP_DOWN_ONLY,
 
                   ///Dropdown box decoration to style your dropdown selector [OPTIONAL PARAMETER] (USE with disabledDropdownDecoration)
                   dropdownDecoration: BoxDecoration(
@@ -74,7 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           Border.all(color: Colors.grey.shade300, width: 1)),
 
                   ///Default Country
-                  defaultCountry: DefaultCountry.India,
 
                   ///selected item style [OPTIONAL PARAMETER]
                   selectedItemStyle: TextStyle(
@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onStateChanged: (value) {
                     setState(() {
                       ///store value in state variable
-                      stateValue = value;
+                      stateValue = value ?? "";
                     });
                   },
 
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onCityChanged: (value) {
                     setState(() {
                       ///store value in city variable
-                      cityValue = value;
+                      cityValue = value ?? "";
                     });
                   },
                 ),
