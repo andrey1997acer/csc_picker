@@ -339,10 +339,14 @@ class _CSCPickerState extends State<CSCPicker> {
       selected: _selectedCountry != null ? _selectedCountry : "Country",
       //selected: _selectedCountry != null ? _selectedCountry : "Country",
       //onChanged: (value) => _onSelectedCountry(value),
-      onChanged: (value) {
+      onChanged: (String? value) {
         print("countryChanged $value $_selectedCountry");
         if (value != null) {
-          _onSelectedCountry(value);
+          if (widget.flagState == CountryFlag.SHOW_IN_DROP_DOWN_ONLY) {
+            _onSelectedCountry(value.substring(6).trim());
+          } else {
+            _onSelectedCountry(value);
+          }
         }
       },
     );
