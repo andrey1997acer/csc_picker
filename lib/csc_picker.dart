@@ -76,7 +76,7 @@ class _CSCPickerState extends State<CSCPicker> {
 
   Future<void> setDefaults() async {
     if (widget.currentCountry != null) {
-      setState(() => _selectedCountry = widget.currentCountry);
+      setState(() => _selectedCountry = widget.currentCountry!);
       await getStates();
     }
 
@@ -129,21 +129,13 @@ class _CSCPickerState extends State<CSCPicker> {
   ///get states from json response
   Future<List<String?>> getStates() async {
     _states.clear();
-    //print(_selectedCountry);
+    print(_selectedCountry);
     var response = await getResponse();
-    var takeState = widget.flagState == CountryFlag.ENABLE ||
-            widget.flagState == CountryFlag.SHOW_IN_DROP_DOWN_ONLY
-        ? response
-            .map((map) => Country.fromJson(map))
-            .where(
-                (item) => item.emoji + "    " + item.name == _selectedCountry)
-            .map((item) => item.state)
-            .toList()
-        : response
-            .map((map) => Country.fromJson(map))
-            .where((item) => item.name == _selectedCountry)
-            .map((item) => item.state)
-            .toList();
+    var takeState = response
+        .map((map) => Country.fromJson(map))
+        .where((item) => item.name == _selectedCountry)
+        .map((item) => item.state)
+        .toList();
     var states = takeState as List;
     states.forEach((f) {
       if (!mounted) return;
@@ -162,19 +154,11 @@ class _CSCPickerState extends State<CSCPicker> {
   Future<List<String?>> getCities() async {
     _cities.clear();
     var response = await getResponse();
-    var takeCity = widget.flagState == CountryFlag.ENABLE ||
-            widget.flagState == CountryFlag.SHOW_IN_DROP_DOWN_ONLY
-        ? response
-            .map((map) => Country.fromJson(map))
-            .where(
-                (item) => item.emoji + "    " + item.name == _selectedCountry)
-            .map((item) => item.state)
-            .toList()
-        : response
-            .map((map) => Country.fromJson(map))
-            .where((item) => item.name == _selectedCountry)
-            .map((item) => item.state)
-            .toList();
+    var takeCity = response
+        .map((map) => Country.fromJson(map))
+        .where((item) => item.name == _selectedCountry)
+        .map((item) => item.state)
+        .toList();
     var cities = takeCity as List;
     cities.forEach((f) {
       var name = f.where((item) => item.name == _selectedState);
