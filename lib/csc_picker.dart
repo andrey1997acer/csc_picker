@@ -183,7 +183,7 @@ class _CSCPickerState extends State<CSCPicker> {
     setState(() {
       if (widget.flagState == CountryFlag.SHOW_IN_DROP_DOWN_ONLY) {
         try {
-          this.widget.onCountryChanged!(value.substring(6).trim());
+          this.widget.onCountryChanged!(value.trim());
         } catch (e) {}
       } else
         this.widget.onCountryChanged!(value);
